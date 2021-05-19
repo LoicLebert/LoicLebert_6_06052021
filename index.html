@@ -5,30 +5,45 @@
     <meta charset="utf-8" />
     <title>FishEye</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/script.js" defer></script>
 </head>
-<header>
-    <div id="logo">
-        <a href="/"><img src="../logo.png" alt="Logo FishEye" /></a>
-    </div>
-    <nav>
-        <ul>
-            <li>#Portrait</li>
-            <li>#Art</li>
-            <li>#Fashion</li>
-            <li>#Architecture</li>
-            <li>#Travel</li>
-            <li>#Sport</li>
-            <li>#Animals</li>
-            <li>#Events</li>
-        </ul>
-    </nav>
-    <h1>Nos photographes</h1>
-</header>
+
 
 <body>
-    <main>
+    <header>
+        <div id="logo">
+            <a href="/"><img src="../logo.png" alt="Logo FishEye" /></a>
+        </div>
+        <!-- <nav>
+            <ul>
+                <li>#Portrait</li>
+                <li>#Art</li>
+                <li>#Fashion</li>
+                <li>#Architecture</li>
+                <li>#Travel</li>
+                <li>#Sport</li>
+                <li>#Animals</li>
+                <li>#Events</li>
+            </ul>
+        </nav> -->
 
+        <nav>
+            <span><a href="index.html?tags=portrait" jsonData="sortByTag">#Portrait</a></span>
+            <span><a href="index.html?tags=art" jsonData="sortByTag">#Art</a></span>
+            <span><a href="index.html?tags=fashion" jsonData="sortByTag">#Fashion</a></span>
+            <span><a href="index.html?tags=architecture" jsonData="sortByTag">#Architecture</a></span>
+            <span><a href="index.html?tags=travel" jsonData="sortByTag">#Travel</a></span>
+            <span><a href="index.html?tags=sport" jsonData="sortByTag">#Sport</a></span>
+            <span><a href="index.html?tags=animals" jsonData="sortByTag">#Animals</a></span>
+            <span><a href="index.html?tags=events" jsonData="sortByTag">#Events</a></span>
+        </nav>
+
+
+        <h1>Nos photographes</h1>
+    </header>
+    <main>
+        <div id="photographers"></div>
     </main>
 </body>
 
