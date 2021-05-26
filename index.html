@@ -6,7 +6,9 @@
     <title>FishEye</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="css/style.css" />
-    <script src="js/script.js" defer></script>
+    <script src="js/api.js" defer></script>
+    <script src="js/index.js" defer></script>
+    <script src="js/filters.js" defer></script>
 </head>
 
 
@@ -28,15 +30,26 @@
             </ul>
         </nav> -->
 
-        <nav>
-            <span><a href="index.html?tags=portrait" jsonData="sortByTag">#Portrait</a></span>
-            <span><a href="index.html?tags=art" jsonData="sortByTag">#Art</a></span>
-            <span><a href="index.html?tags=fashion" jsonData="sortByTag">#Fashion</a></span>
-            <span><a href="index.html?tags=architecture" jsonData="sortByTag">#Architecture</a></span>
-            <span><a href="index.html?tags=travel" jsonData="sortByTag">#Travel</a></span>
-            <span><a href="index.html?tags=sport" jsonData="sortByTag">#Sport</a></span>
-            <span><a href="index.html?tags=animals" jsonData="sortByTag">#Animals</a></span>
-            <span><a href="index.html?tags=events" jsonData="sortByTag">#Events</a></span>
+        <!-- <nav id="filtersNav">
+            <span><a href="index.html?tags=portrait">#Portrait</a></span>
+            <span><a href="index.html?tags=art">#Art</a></span>
+            <span><a href="index.html?tags=fashion">#Fashion</a></span>
+            <span><a href="index.html?tags=architecture">#Architecture</a></span>
+            <span><a href="index.html?tags=travel">#Travel</a></span>
+            <span><a href="index.html?tags=sport">#Sport</a></span>
+            <span><a href="index.html?tags=animals">#Animals</a></span>
+            <span><a href="index.html?tags=events">#Events</a></span>
+        </nav> -->
+
+        <nav id="filtersNav">
+            <span class="portrait" onclick="sortByTags('portrait')">#Portrait</span>
+            <span class="art" onclick="sortByTags('art')">#Art</a></span>
+            <span class="fashion" onclick="sortByTags('fashion')">#Fashion</a></span>
+            <span class="architecture" onclick="sortByTags('architecture')">#Architecture</a></span>
+            <span class="travel" onclick="sortByTags('travel')">#Travel</a></span>
+            <span class="sport" onclick="sortByTags('sport')">#Sport</a></span>
+            <span class="animals" onclick="sortByTags('animals')">#Animals</a></span>
+            <span class="events" onclick="sortByTags('events')">#Events</a></span>
         </nav>
 
 

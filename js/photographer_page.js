@@ -11,7 +11,7 @@ function displayPhotographer(photographerData) {
     // add photographer link
     const photographerLink = document.createElement("a")
     photographerLink.classList.add("nameLink")
-    photographerLink.innerHTML = `<a href="../photographer_page.html"><h2>${photographerData.name}</h2></a>`;
+    photographerLink.innerHTML = `<h2>${photographerData.name}</h2></a>`;
     photographerProfile.appendChild(photographerLink)
 
     // add photographer city
@@ -39,39 +39,21 @@ function displayPhotographer(photographerData) {
     photographerProfile.appendChild(photographerPrice)
 
     // add photographer tags
-    const photographerTagsContainer = document.createElement("div")
-    photographerTagsContainer.classList.add("tagsContainer")
+    const photographerTags = document.createElement("p")
     photographerData.tags.forEach(tag => {
-        const photographerTags = document.createElement("p")
-        photographerTags.classList.add("tagParagraphContainer")
-        photographerTags.innerHTML = `<a class="photographerTagsFilter" href="${tag}">#${tag}</a></span>`
-        photographerTagsContainer.appendChild(photographerTags)
+        photographerTags.innerHTML = `<span class="filter"><a href="${tag}">#${tag}</a></span>`
     })
-    photographerProfile.appendChild(photographerTagsContainer)
+    photographerProfile.appendChild(photographerTags)
 
     // injects photographer profile to the photographer div
-    document.getElementById("photographers").appendChild(photographerProfile)
+    document.getElementById("photographerPage").appendChild(photographerProfile)
 
 }
 
-// this function awaits the promise to be resolved to launch displayPhotographers
 async function init() {
-    let photographersData = await getPhotographersData();
-    photographersData.forEach(photographerData => {
-        displayPhotographer(photographerData)
-    });
+    let photographersData = await getPhotographersData()
+    displayPhotographer(photographerData)
+    // url
 }
 
 init()
-
-
-
-
-
-
-
-
-
-
-
-

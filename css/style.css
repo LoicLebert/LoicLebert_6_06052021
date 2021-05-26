@@ -18,6 +18,10 @@ nav {
     margin-top: 2em;
 }
 
+nav span {
+    cursor: pointer;
+}
+
 ul {
     display: flex;
     flex-direction: row;
@@ -33,17 +37,23 @@ ul {
     margin-left: 5em;
 }
 
-span, .tags {
+span, .photographerTagsFilter {
     border: 0.5px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 11px;
     color: #911C1C;
-    font-weight: 500;
+    font-weight: bolder;
     font-size: 12px;
     width: 68px;
     height: 22px;
     text-align: center;
     line-height: 16px;
+}
+
+.tagsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 a {
@@ -52,7 +62,6 @@ a {
     line-height: 16px;
     font-family: "DM sans", sans-serif;
     font-style: normal;
-    font-weight: bolder;
     font-size: 12px;
     text-align: center;
 }
@@ -61,7 +70,7 @@ main {
     width: 100%;
 }
 
-#photographers {
+#photographers, #photographerProfile {
     font-size: 3em;
     display: flex;
     flex-direction: row;
@@ -83,14 +92,29 @@ main {
     line-height: 47px;
 }
 
-#photographers p {
+#photographerPage div {
+    color: #D3573C;
+    text-align: center;
+    font-size: 36px;
+    line-height: 47px;
+}
+
+#photographers p{
     margin: 0;
 }
 
-#photographers img {
+#photographerPage p{
+    margin: 0;
+}
+
+#photographers img{
     object-fit: cover;
     height: 100px;
+}
 
+#photographerPage img{
+    object-fit: cover;
+    height: 100px;
 }
 
 h1 {
