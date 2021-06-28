@@ -1,6 +1,13 @@
+*, *:before, *:after {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+
 body {
     line-height: 1;
-    font-family: "DM sans", sans-serif;
+    font-family: 'DM Sans', sans-serif;
     margin-top: 2em;
     margin-left: 6em;
     margin-right: 6em;
@@ -9,17 +16,16 @@ body {
 header {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
 }
+
 
 nav {
-    width: 553px;
     height: 49px;
-    margin-top: 2em;
-}
-
-nav span {
-    cursor: pointer;
+    position: absolute;
+    justify-items: center;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 ul {
@@ -37,110 +43,490 @@ ul {
     margin-left: 5em;
 }
 
-span, .photographerTagsFilter {
+.tag {
     border: 0.5px solid #C4C4C4;
     box-sizing: border-box;
-    border-radius: 11px;
+    border-radius: 15px;
     color: #911C1C;
     font-weight: bolder;
     font-size: 12px;
-    width: 68px;
-    height: 22px;
     text-align: center;
     line-height: 16px;
+    cursor: pointer;
+    /* padding: 0.5em; */
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
 }
 
 .tagsContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 0.5em;
 }
 
 a {
     text-decoration: none;
     color: inherit;
     line-height: 16px;
-    font-family: "DM sans", sans-serif;
-    font-style: normal;
     font-size: 12px;
     text-align: center;
-}
-
-main {
-    width: 100%;
-}
-
-#photographers, #photographerProfile {
-    font-size: 3em;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    flex: row;
-    max-width: 100%;
-    gap: 4em;
-    margin-top: 2em;
-    margin-left: 5em;
-    margin-right: 5em;
-    
-}
-
-#photographers div {
-    color: #D3573C;
-    text-align: center;
-    font-size: 36px;
-    line-height: 47px;
-}
-
-#photographerPage div {
-    color: #D3573C;
-    text-align: center;
-    font-size: 36px;
-    line-height: 47px;
-}
-
-#photographers p{
-    margin: 0;
-}
-
-#photographerPage p{
-    margin: 0;
-}
-
-#photographers img{
-    object-fit: cover;
-    height: 100px;
-}
-
-#photographerPage img{
-    object-fit: cover;
-    height: 100px;
 }
 
 h1 {
     color: #901C1C;
     font-size: 36px;
     line-height: 47px;
-    font-family: "DM sans", sans-serif;
-    font-weight: bold;
     text-align: center;
 
 }
 
-.city, .country {
-    font-size: 13px;
+main {
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+h1 {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+}
+
+#photographers {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-width: 100%;
+    row-gap: 6em;
+    column-gap: 20em;
+    margin-top: 2em;
+}
+
+.photographerContainer {
+    display: flex;
+    flex: 1 0 20%;
+    flex-direction: column;
+    text-align: center;
+    width: 300px;
+    justify-content: space-between;
+    height: 410px;
+}
+
+.photographerContainer img {
+    text-align: center;
+    object-fit: cover;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+
+.photographerContainer a {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 23px;
+    line-height: 47px;
+    width: 100%;
+    max-height: 300px;
+    white-space:nowrap;
+}
+
+.photographerContainer h2 {
+    margin-top: 1em;
+}
+
+.photographerName {
+    color: #D3573C;
+    font-weight: 100;
+}
+
+.photographerDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+}
+
+.photoLike {
+    display: flex;
+    flex-direction: row;
+    order: 2;
+}
+
+.photographerContainer p {
+    margin: 0;
+}
+
+.photographerProfile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    order: 1;
+    width: 100%;
+    height: 313px;
+    background-color: #FAFAFA;
+    padding: 2em;
+}
+
+.photographerProfile a {
+    color: #D3573C;
+    text-align: center;
+    font-size: 64px;
+    line-height: 47px;
+}
+
+.photographerProfile img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    order: 3;
+}
+
+.photographerInfos {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    justify-content: space-between;
+    order: 1;
+}
+
+.photographerInfos h2 {
+    font-size: 70px;
+}
+
+.photographerInfos .tagline {
+    font-size: 16px;
+    color: #525252;
+    font-weight: 200;
+}
+
+.photographerLocation {
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
     color: #901C1C;
-    font-weight: bold;
+}
+
+.sortBtnContainer {
+    display: flex;
+}
+
+#sortPics {
+    display: flex;
+    flex-direction: row;
+    order: 2;
+    align-items: center;
+    align-self:flex-start;
+}
+
+#sortPics span {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.sortPicsBtn {
+    color: white;
+    font-size: 20px;
+    font-family: inherit;
+    font-weight: 400;
+    border: none;
+    background-color: #901C1C;
+    cursor: pointer;
+    width: 170px;
+    height: 69px;
+    border-radius: 5px;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.sortArrow {
+    position: relative;
+    right: -155px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: url(../images/arrow_white.svg)center center / 12px 21px no-repeat;
+    width: 32px;
+    z-index: 2000;
+    text-indent: -9999px;
+    transform: rotate(90deg);
+}
+
+#photographerMedias {
+    display: flex;
+    order: 3;
+}
+
+.photoTitle {
+    font-size: 24px;
+    color: #901C1C;
+    order: 1;
+}
+
+.photoDescription {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    order: 2;
 }
 
 .tagline {
     font-size: 10px;
     color: black;
-    font-weight: bold;
-    font-family: "DM sans", sans-serif;
 }
 
 .price {
     color: #757575;
     font-size: 12px;
+}
+
+.formBtn {
+  position: absolute;
+  left: 650px;
+  display: block;
+  order: 2;
+  color: white;
+  font-size: 20px;
+  font-family: inherit;
+  font-weight: 400;
+  border: none;
+  background-color: #901C1C;
+  width: 170px;
+  height: 69px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.formBg {
+  display: none;
+}
+
+.formBg.active {
+    width: 669px;
+    height: 900px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 5em;
+    background-color: #DB8876;
+    border-radius: 5px;
+    z-index: 2;
+}
+
+.close {
+  position: absolute;
+  z-index: 2;
+  right: 15px;
+  top: 15px;
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+  cursor: pointer;
+  transform: scale(0.7);
+}
+.close:before,
+.close:after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 3px;
+  background-color: #fff;
+}
+
+form {
+  width: 100%;
+  height: 90%;
+  text-align: center;
+}
+
+form input {
+  width: 599px;
+  height: 68px;
+  border-radius: 5px;
+}
+
+.photographerPageMain {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 5em;
+}
+
+#photographerMedias::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#photographerMedias img {
+    width: 350px;
+    height: 300px;
+    object-fit: cover;
+}
+
+#photographerMedias a {
+    font-size: 24px;
+    color: #901C1C;
+}
+
+i {
+    position: relative;
+    width: 17px;
+    height: 18px;
+    color: #901C1C;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.like-button {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 20px;
+    height: 20px;
+}
+
+/* LIGHTBOX */
+
+#lightbox_next,
+#lightbox_prev {
+    display: none;
+}
+
+#lightbox_next.active,
+#lightbox_prev.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: url(../images/arrow.svg) center center / 16px 28px no-repeat;
+    width: 32px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin-top: -14px;
+    z-index: 2000;
+}
+
+#lightbox_prev {
+    right: auto;
+    left: 0;
+    transform: rotate(180deg);
+}
+
+#lightbox_close {
+    display: none;
+}
+
+#lightbox_close.active {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: url(../images/cross.svg) center center / 100% 100% no-repeat transparent;
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    z-index: 2000;
+}
+
+.lightbox-container {
+    order: 2;
+}
+
+.lightbox-container button  {
+    cursor: pointer;
+    text-indent: -9999px;
+}
+
+.lightboxFlexDisplay {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    order: 2;
+    row-gap: 5em;
+    column-gap: 15em;
+}
+
+.lightboxFlexDisplay img {
+    width: 350px;
+    height: 300px;
+    cursor: pointer;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+#lightbox {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: none;
+}
+
+#lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: cover;
+    box-shadow: 6px 5px 2px rgb(216, 216, 216);
+}
+
+#lightbox.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mediaContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 350px;
+    height: 340px;
+}
+
+.photographerSummary {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em;
+    width: 376px;
+    height: 89px;
+    border-radius: 5px;
+    bottom: -0.8em;
+    right: 4em;
+    background-color: #DB8876;
+    z-index: 9999;
+}
+
+.photographerSummary i {
+    color: black;
+    font-size: 30px;
+}
+.priceSummary {
+    font-family: "DM Sans", sans-serif;
+    font-size: 30px;
 }

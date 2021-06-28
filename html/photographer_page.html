@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>FishEye</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="https://kit.fontawesome.com/8264f3a608.js" crossorigin="anonymous"></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/photographer_page.js" defer></script>
+    <script src="../js/form.js" defer></script>
+    <script src="../js/lightbox.js" defer></script>
+</head>
+
+
+<body>
+    <header>
+        <div id="logo">
+            <a href="/html/index.html"><img src="../images/logo.png" alt="Fisheye Home page" /></a>
+        </div>
+    </header>
+
+    <main class="photographerPageMain">
+        <div id="sortPics">
+            <span>Trier par</span>
+            <div class="sortBtnContainer">
+                <span class="sortArrow">arrow</span>
+                <select class="sortPicsBtn">
+                    <OPTION class="sortByPopularity" value="Popularité">Popularité</OPTION>
+                    <OPTION class="sortByDate" value="Date">Date</OPTION>
+                    <OPTION class="sortByTitle" value="Titre">Titre</OPTION>
+                </select>
+            </div>
+        </div>
+        <button class=" formBtn">Contactez-moi</button>
+        <div class="formBg">
+            <span class="close"></span>
+            <form id="form" method="GET">
+                <span>Prénom</span>
+                <br><br>
+                <input type="text" id="firstName" />
+                <br><br>
+                <span>Nom</span>
+                <br><br>
+                <input type="text" id="lastName" />
+                <br><br>
+                <span>Email</span>
+                <br><br>
+                <input type="email" id="email" />
+                <br><br>
+                <span>Votre message</span>
+                <br><br>
+                <textarea id="message" rows="4"></textarea>
+                <br><br>
+                <input type="submit" class="btn-close"></input>
+            </form>
+            <p style="color: red;" id="erreur"></p>
+        </div>
+
+        <div class="lightbox-container">
+            <button class="lightbox-button" id="lightbox_close">Fermer</button>
+            <button class="lightbox-button" id="lightbox_next" mediaId="">Suivant</button>
+            <button class="lightbox-button" id="lightbox_prev" mediaId="">Précédent</button>
+
+            <div class="lightboxFlexDisplay">
+            </div>
+        </div>
+
+        <div class="photographerSummary">
+
+        </div>
+    </main>
+</body>

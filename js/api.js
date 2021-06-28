@@ -1,6 +1,8 @@
-// this function gets the photographers' data
+// DATA
+
+// this function gets the photographers' datas
 async function getPhotographersData() {
-    let data = await fetch("js/FishEyeData.json")
+    let data = await fetch("../js/FishEyeData.json")
         .then(res => res.json())
         .then(jsonData => {
             return jsonData.photographers
@@ -8,12 +10,28 @@ async function getPhotographersData() {
     return data
 }
 
+// this function gets the id of the photographer
+async function getPhotographerData(id) {
+    let data = await fetch("../js/FishEyeData.json")
+        .then(res => res.json())
+        .then(jsonData => {
+            return jsonData.photographers.filter(p => p.id == id)[0]
+        });
+    return data
+}
 
 
+// MEDIA
 
-// let tag = document.getElementsByClassName("tags");
-// tag.addEventListener("click", showPhotographerByTag);
-// // this function sorts photographers by tags
-// function showPhotographerByTag() {
+// this function gets the id of the photographer media
+async function getPhotographerMedia(photographerId) {
+    let photographerMedia = await fetch("../js/FishEyeData.json")
+        .then(res => res.json())
+        .then(jsonData => {
+            return jsonData.media.filter(medium => medium.photographerId == photographerId)
+        });
+    return photographerMedia
+    // console.log(photographerMedia)
+}
 
-// }
+
