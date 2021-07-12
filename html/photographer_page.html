@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="../css/style.css" />
     <script src="https://kit.fontawesome.com/8264f3a608.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
     <script src="../js/api.js" defer></script>
     <script src="../js/photographer_page.js" defer></script>
     <script src="../js/form.js" defer></script>
@@ -26,10 +27,11 @@
             <span>Trier par</span>
             <div class="sortBtnContainer">
                 <span class="sortArrow">arrow</span>
-                <select class="sortPicsBtn">
-                    <OPTION class="sortByPopularity" value="Popularité">Popularité</OPTION>
-                    <OPTION class="sortByDate" value="Date">Date</OPTION>
-                    <OPTION class="sortByTitle" value="Titre">Titre</OPTION>
+                <select id="sortPicsBtn">
+                    <OPTION class="sortBtn" id="sortByPopularity" name="sortByPopularity" value="popularity">Popularité
+                    </OPTION>
+                    <OPTION class="sortBtn" id="sortByDate" name="sortByDate" value="date">Date</OPTION>
+                    <OPTION class="sortBtn" id="sortByTitle" name="sortByTitle" value="title">Titre</OPTION>
                 </select>
             </div>
         </div>
@@ -67,7 +69,9 @@
             </div>
         </div>
 
-        <div class="photographerSummary">
+        <div class="photographerSummary"></div>
+
+        <div id="lightbox"><img id="lightboxImage"></div>
 
         </div>
     </main>

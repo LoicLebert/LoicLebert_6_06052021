@@ -13,3 +13,7 @@ function sortByTags(tag) {
     })
     photographers.setAttribute("currentFilter", tag)
 };
+
+function photographerInfosTagsSorting() {
+
+}

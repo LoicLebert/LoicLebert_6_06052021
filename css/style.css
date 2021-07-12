@@ -232,7 +232,7 @@ h1 {
     font-weight: 700;
 }
 
-.sortPicsBtn {
+#sortPicsBtn {
     color: white;
     font-size: 20px;
     font-family: inherit;
@@ -252,6 +252,7 @@ h1 {
 }
 
 .sortArrow {
+    pointer-events: none;
     position: relative;
     right: -155px;
     display: flex;
@@ -324,18 +325,19 @@ h1 {
     background-color: #DB8876;
     border-radius: 5px;
     z-index: 2;
+    padding: 2em;
 }
 
 .close {
+  background: url(../images/cross_white.svg) center center / 100% 100% no-repeat transparent;
+  width: 50px;
+  height: 50px;
   position: absolute;
+  right: 40px;
+  top: 40px;
   z-index: 2;
-  right: 15px;
-  top: 15px;
-  width: 32px;
-  height: 32px;
   opacity: 1;
   cursor: pointer;
-  transform: scale(0.7);
 }
 .close:before,
 .close:after {
@@ -344,19 +346,66 @@ h1 {
   content: " ";
   height: 33px;
   width: 3px;
-  background-color: #fff;
+}
+
+.close i {
+    color: white;
+    font-size: 100px;
 }
 
 form {
+  margin-top: 2em;
   width: 100%;
-  height: 90%;
-  text-align: center;
+  height: 100%;
+  order: 2;
+  line-height: 0.8;
+}
+
+form span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 36px;
 }
 
 form input {
   width: 599px;
   height: 68px;
   border-radius: 5px;
+  border: none;
+  font-size: 40px;
+  font-family: 'DM Sans', sans-serif;;
+}
+
+textarea {
+   height: 170px;
+   width: 100%;
+   border: none; 
+   resize: none;
+}
+
+.btn-close {
+    color: white;
+    font-size: 20px;
+    font-family: inherit;
+    font-weight: 400;
+    border: none;
+    background-color: #901C1C;
+    cursor: pointer;
+    width: 170px;
+    height: 69px;
+    border-radius: 5px;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.photographerForm {
+    padding-right: 1.5em;
+    font-size: 64px;
+    font-weight: lighter;
+    order: 1;
 }
 
 .photographerPageMain {

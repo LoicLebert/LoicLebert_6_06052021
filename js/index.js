@@ -55,7 +55,6 @@ function displayPhotographers(photographerData) {
         const photographerTags = document.createElement("span")
         photographerTags.setAttribute("class", `${tag} tag`)
         photographerTags.setAttribute("onclick", `sortByTags('${tag}')`)
-        // photographerTags.innerHTML = `<span class="${tag}" onclick="sortByTags('${tag}')">#${tag}</span>`
         photographerTags.innerHTML = `#${tag}`
         photographerTagsContainer.appendChild(photographerTags)
     })

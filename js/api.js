@@ -31,7 +31,6 @@ async function getPhotographerMedia(photographerId) {
             return jsonData.media.filter(medium => medium.photographerId == photographerId)
         });
     return photographerMedia
-    // console.log(photographerMedia)
 }
 
 

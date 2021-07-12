@@ -1,7 +1,10 @@
-const main = document.querySelector("main");
+const main = document.querySelector("main")
+let currentImagePosition = 0
+let listMedias = []
+let totalLikes = 0
 
 // this function displays the photographers on pages
-function displayPhotographer(photographerData) {
+function displayPhotographerInfos(photographerData) {
     // photographer form
     const photographerForm = document.createElement("span")
     photographerForm.classList.add("photographerForm")
@@ -20,7 +23,7 @@ function displayPhotographer(photographerData) {
     // add photographer link
     const photographerLink = document.createElement("h2")
     photographerLink.classList.add("photographerName")
-    photographerLink.innerHTML = `${photographerData.name}`;
+    photographerLink.innerHTML = `${photographerData.name}`
     photographerInfos.appendChild(photographerLink)
 
     const photographerLocation = document.createElement("div")
@@ -57,10 +60,10 @@ function displayPhotographer(photographerData) {
 
     // add photographer total likes
     const photographerSummary = document.querySelector(".photographerSummary")
-    const likeCount = document.createElement("div")
-    likeCount.innerHTML = `<i class="fas fa-heart">`
-    likeCount.classList.add = ("likeCount")
-    photographerSummary.appendChild(likeCount)
+    const photographerTotalLikes = document.createElement("div")
+    photographerTotalLikes.innerHTML = totalLikes + `<i class="fas fa-heart"></i>`
+    photographerTotalLikes.classList.add = ("likeCount")
+    photographerSummary.appendChild(photographerTotalLikes)
     const priceSummary = document.createElement("div")
     priceSummary.innerHTML = `${photographerData.price}€ / jour`
     priceSummary.classList.add("priceSummary")
@@ -76,19 +79,23 @@ function displayPhotographer(photographerData) {
 // =============================================================== //
 
 // this function displays medias on photographer page
-async function displayPhotographerMedia(media) {
+async function displayPhotographerMedia(photographerMedias, index) {
 
-    let photographer = await getPhotographerData(media.photographerId)
+    let photographer = await getPhotographerData(photographerMedias[index].photographerId)
 
     // add photographer medias
     const photographerMediaContainer = document.createElement("div")
     photographerMediaContainer.classList.add("mediaContainer")
+    photographerMediaContainer.setAttribute("id", `container${photographerMedias[index].id}`)
     const photographerMedia = document.createElement("img")
     const lightboxFlexDisplay = document.querySelector(".lightboxFlexDisplay")
-    photographerMedia.src = `/images/${photographer.name}/${media.image}`
+    photographerMedia.src = `/images/${photographer.name}/${photographerMedias[index].image}`
     photographerMedia.classList.add("photographerMedia")
-    photographerMedia.setAttribute("id", `${media.id}`)
-    photographerMedia.addEventListener("click", e => {
+    // photographerMedia.setAttribute("id", `${photographerMedias[index].id}`)
+    // shows lightbox
+    photographerMedia.addEventListener("click", function (e) {
+        currentImagePosition = index
+        e.preventDefault
         let lightbox = document.getElementById("lightbox")
         lightbox.classList.add("active")
         let lightboxNext = document.querySelector("#lightbox_next")
@@ -97,13 +104,9 @@ async function displayPhotographerMedia(media) {
         lightboxPrev.classList.add("active")
         let lightboxClose = document.querySelector("#lightbox_close")
         lightboxClose.classList.add("active")
-        const img = document.createElement("img")
-        img.src = `/images/${photographer.name}/${media.image}`
-        img.id = "lightboxImage"
-        while (lightbox.firstChild) {
-            lightbox.removeChild(lightbox.firstChild)
-        }
-        lightbox.appendChild(img)
+        let lightboxImage = document.querySelector("#lightboxImage")
+        lightboxImage.src = `/images/${photographer.name}/${photographerMedias[index].image}`
+        lightboxImage.setAttribute("photographerName", photographer.name)
     })
 
     const photoDescription = document.createElement("div")
@@ -112,89 +115,57 @@ async function displayPhotographerMedia(media) {
 
     const photoTitle = document.createElement("span")
     photoTitle.classList.add("photoTitle")
-    photoTitle.innerHTML = `${media.title}`
+    photoTitle.innerHTML = `${photographerMedias[index].title}`
     photoDescription.appendChild(photoTitle)
 
-    const photoLike = document.createElement("div")
-    photoLike.addEventListener("click", () => likeCount())
-    photoLike.classList.add("photoLike")
+    const photoLikes = document.createElement("div")
+    photoLikes.addEventListener("click", () => likeCount(photographerMedias, index))
+    photoLikes.classList.add("photoLike")
     const likeIcon = document.createElement("span")
     likeIcon.innerHTML = `<i class="fas fa-heart"></i>`
-    photoLike.appendChild(likeIcon)
+    photoLikes.appendChild(likeIcon)
     const likePara = document.createElement("p")
     likePara.classList.add("likePara")
-    likePara.innerHTML = `${media.likes}`
-    photoLike.appendChild(likePara)
-    photoDescription.appendChild(photoLike)
+    likePara.innerHTML = `${photographerMedias[index].likes}`
+    totalLikes += photographerMedias[index].likes
+    photoLikes.appendChild(likePara)
+    photoDescription.appendChild(photoLikes)
 
     // injects photographer profile to the photographer div
     photographerMediaContainer.appendChild(photographerMedia)
     lightboxFlexDisplay.appendChild(photographerMediaContainer)
 }
 
+async function displayAllMedias(photographerMedias) {
+    document.querySelector(".lightboxFlexDisplay").innerHTML = ""
+    for (let i = 0; i < photographerMedias.length; i++) {
+        await displayPhotographerMedia(photographerMedias, i)
+    }
+}
 
-// this function finds photographer's id and awaits the promise to be resolved to launch displayPhotographers
+// this function displays the photographer medias according to the id in the url
 async function init() {
     var searchParams = new URLSearchParams(window.location.search)
     var id = searchParams.get("id")
+    listMedias = await getPhotographerMedia(id)
     let photographerData = await getPhotographerData(id)
-    displayPhotographer(photographerData)
+    displayAllMedias(listMedias)
+    // verifier valeur totalLikes
+    // verifier le selecteur de photographerTotalLikes
+    // verifier les 3 fonctions displayPhotographerMedia, displayPhotographerInfos, LikeCount
+    displayPhotographerInfos(photographerData)
 }
 
 init()
 
-// this function displays the photographer medias according to the id in the url
-async function initMedias() {
-    var searchParams = new URLSearchParams(window.location.search)
-    var photographerId = searchParams.get("id")
-    let photographerMedias = await getPhotographerMedia(photographerId)
-
-    photographerMedias.forEach(photographerMedia => {
-        displayPhotographerMedia(photographerMedia)
-    });
-}
-
-// async function initMedias() {
-//     var searchParams = new URLSearchParams(window.location.search)
-//     var photographerId = searchParams.get("id")
-//     let photographerMedias = await getPhotographerMedia(photographerId)
-
-//     var last_id = 0
-//     var pmedia_last = 0
-//     var previous_id = 0
-//     var next_id = 0
-
-//     photographerMedias.forEach(photographerMedia => {
-//         pmedia_last = 0
-//         photographerMedias.forEach(pMedia => {
-//             if (last_id == pMedia.id) {
-//                 console.log(last_id)
-//                 previous_id = last_id
-//             }
-
-//             if (pmedia_last == photographerMedia.id) {
-//                 next_id = pMedia.id
-//             }
-
-//             pmedia_last = pMedia.id
-//         });
-//         displayPhotographerMedia(photographerMedia, previous_id, next_id)
-//         last_id = photographerMedia.id
-//     });
-// }
-
-initMedias()
-
 // LIKE COUNT
 
-// let liked = false
-// let likes = `${media.likes}`
-
-function likeCount(media) {
-    media.isLiked = !media.isLiked
-    media.likes += media.isLiked ? 1 : -1;
-
-    document.querySelector(".likeA").textContent = `${media.likes}`
+function likeCount(photographerMedias, index) {
+    photographerMedias[index].isLiked = !photographerMedias[index].isLiked
+    photographerMedias[index].likes += photographerMedias[index].isLiked ? 1 : -1;
+    totalLikes += photographerMedias[index].isLiked ? 1 : -1;
+    document.querySelector(`#container${photographerMedias[index].id} .likePara`).textContent = `${photographerMedias[index].likes}`
+    photographerTotalLikes.innerHTML = totalLikes
 }
 
 // LIGHTBOX
@@ -220,102 +191,90 @@ window.addEventListener('keydown', function (event) {
 });
 
 function closeLightbox() {
+    // document.querySelector("#lightbox, #lightbox_prev, #lightbox_next, #lightbox_close").classList.remove("active")
     document.querySelector("#lightbox").classList.remove("active")
     document.querySelector("#lightbox_prev").classList.remove("active")
     document.querySelector("#lightbox_next").classList.remove("active")
     document.querySelector("#lightbox_close").classList.remove("active")
 }
 
-// PREVIOUS & NEXT BUTTONS
-// const previousButton = document.querySelector("#lightbox_prev")
-// previousButton.addEventListener("click", lightboxNavigation)
+document.querySelector("#lightbox_prev").addEventListener("click", lightboxPrev)
+document.querySelector("#lightbox_next").addEventListener("click", lightboxNext)
 
-// const nextButton = document.querySelector("#lightbox_next")
-// nextButton.addEventListener("click", lightboxNavigation)
+window.addEventListener("keydown", function (e) {
+    if (e.code == "ArrowLeft") {
+        lightboxPrev()
+    }
+})
+window.addEventListener("keydown", function (e) {
+    if (e.code == "ArrowRight") {
+        lightboxNext()
+    }
+})
 
-// function lightboxNavigation(e) {
-//     let new_id = this.getAttribute("mediaId")
-//     var photographerId = new URLSearchParams(window.location.search).get("id")
-//     changeLightbox(photographerId, new_id)
-// }
+function lightboxPrev() {
+    if (currentImagePosition > 0) {
+        currentImagePosition--
+        let lightboxImage = document.querySelector("#lightboxImage")
+        lightboxImage.src = `/images/${lightboxImage.getAttribute("photographerName")}/${listMedias[currentImagePosition].image}`
+    }
+}
 
-// async function changeLightbox(photographerId, new_id) {
-//     let data = await getPhotographerMedia(photographerId)
-//     let last_id = 0
-//     let previous_id = 0
-//     let next_id = 0
-//     let img = document.getElementById("lightboxImage")
-//     let s_source = img.getAttribute("src")
-//     data.forEach(media => {
-//         if (`${media.id}` == new_id) {
-//             previous_id = last_id
-//             s_source.substring(0, s_source.lastIndexOf("/")) + `${media.title}`;
-//             console.log(s_source)
-//             img.setAttribute("src", s_source)
-//         }
-//         if (last_id == new_id) {
-//             next_id = `${media.id}`
-//         }
-//         last_id = `${media.id}`
+function lightboxNext() {
+    if (currentImagePosition < listMedias.length - 1) {
+        currentImagePosition++
+        let lightboxImage = document.querySelector("#lightboxImage")
+        lightboxImage.src = `/images/${lightboxImage.getAttribute("photographerName")}/${listMedias[currentImagePosition].image}`
+    }
+}
+
+// totalLikesCount() {
+//     let totalLikes = 0
+//     let likes = document.querySelectorAll(".likePara")
+//     likes = Array.from(likes)
+//     likes.forEach(like => {
+//         like.addEventListener("click", e =>{
+//             e.preventDefault()
+//             like[0].innerHTML = (parseInt(like[0].innerHTML) +1).toString();
+//         })
 //     })
-
-//     // displayButtonOnLightbox(previous_id, next_id) => {
-
-//     // }
 // }
 
-// class MediaLightbox {
+let sortPicsBtn = document.getElementById("sortPicsBtn")
+sortPicsBtn.addEventListener("change", sortPics)
 
-//     constructor(photographer, photographerMedia, displayedMediumId) {
-//         super();
+// this function sort photos
+function sortPics(e) {
+    let sortBtnValue = this.options[this.selectedIndex].value
+    let sortedMedias = []
+    switch (sortBtnValue) {
+        case "popularity":
+            sortedMedias = listMedias.sort(function (a, b) {
+                return b.likes - a.likes
+            })
+            break
+        case "date":
+            sortedMedias = listMedias.sort(function (a, b) {
+                let dateA = new Date(a.date.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
 
-//         this._photographer = photographer;
-//         this._photographerMedia = photographerMedia
-//         this._displayedMediumId = displayedMediumId;
-//     }
+                let dateB = new Date(b.date.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
 
-//     get _displayedMedia() {
-//         for (const medium of this.mediaList.media) {
-//             if (medium.id == this._displayedMediumId) return medium;
-//         }
-//         return null;
-//     }
+                return dateB - dateA;
+            })
+            break
+        case "title":
+            sortedMedias = listMedias.sort((a, b) => a.title.localeCompare(b.title))
+            break
+        default:
+            console.log("Cette option n'existe pas.")
+    }
 
-//     get _displayedMediumIndex() {
-//         for (const medium of this._mediaList.media) {
-//             if (medium.id == this._displayedMediumId) {
-//                 return this._mediaList.media.indexOf(medium);
-//             }
-//         }
-//         return null;
-//     }
-
-//     get html() {
-//         const displayedMediumHtml = new Dis
-//     }
-
-
-
-
-
-
+    if (sortedMedias.length > 0) {
+        displayAllMedias(sortedMedias)
+    }
+}
 
 
-// class MediaLightbox {
-
-//     static init() {
-//         const links = Array.from(document.querySelector(".photographerMedia"))
-//         const gallery = links.map(link => link.getAttribute("blabla"))
-//         console.log(gallery)
-//     }
-// }
-
-
-// next(e) {
-//     e.preventDefault()
-//     let i = this.images.findIndex(image => image === this.url)
-//     this.loadImage(this.images[i + 1])
-// }
 
 
 
