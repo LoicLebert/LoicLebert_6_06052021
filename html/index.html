@@ -13,28 +13,37 @@
     <script src="../js/api.js" defer></script>
     <script src="../js/index.js" defer></script>
     <script src="../js/filters.js" defer></script>
+    <script src="../js/Photographer.js" defer></script>
 </head>
 
 
 <body>
     <header>
-        <a class="logo" href="/html/index.html"><img src="../images/logo.png" alt="Fisheye Home page" /></a>
+        <a id="logo" href="/html/index.html" tabindex="1"><img src="../images/logo.png" alt="Fisheye Home page" /></a>
         <nav aria-label="photographer categories" id="filtersNav">
-            <span class="portrait tag" onclick=" sortByTags('portrait')">#Portrait</span>
-            <span class="art tag" onclick="sortByTags('art')">#Art</span>
-            <span class="fashion tag" onclick="sortByTags('fashion')">#Fashion</span>
-            <span class="architecture tag" onclick="sortByTags('architecture')">#Architecture</span>
-            <span class="travel tag" onclick="sortByTags('travel')">#Travel</span>
-            <span class="sport tag" onclick="sortByTags('sport')">#Sport</span>
-            <span class="animals tag" onclick="sortByTags('animals')">#Animals</span>
-            <span class="events tag" onclick="sortByTags('events')">#Events</span>
+            <span id="portrait" class="tag" onclick="sortByTags('portrait')" onkeydown="sortByTagsKey('portrait')"
+                tabindex="2">#Portrait</span>
+            <span id="art" class="tag" onclick="sortByTags('art')" onkeydown="sortByTagsKey('art')"
+                tabindex="2">#Art</span>
+            <span id="fashion" class="tag" onclick="sortByTags('fashion')" onkeydown="sortByTagsKey('fashion')"
+                tabindex="2">#Fashion</span>
+            <span id="architecture" class="tag" onclick="sortByTags('architecture')"
+                onkeydown="sortByTagsKey('architecture')" tabindex="2">#Architecture</span>
+            <span id="travel" class="tag" onclick="sortByTags('travel')" onkeydown="sortByTagsKey('travel')"
+                tabindex="2">#Travel</span>
+            <span id="sport" class="tag" onclick="sortByTags('sport')" onkeydown="sortByTagsKey('sport')"
+                tabindex="2">#Sport</span>
+            <span id="animals" class="tag" onclick="sortByTags('animals')" onkeydown="sortByTagsKey('animals')"
+                tabindex="2">#Animals</span>
+            <span id="events" class="tag" onclick="sortByTags('events')" onkeydown="sortByTagsKey('events')"
+                tabindex="2">#Events</span>
         </nav>
     </header>
 
-    <main class="indexPageMain">
-        <h1>Nos photographes</h1>
+    <main id="indexPageMain">
+        <h1 id="our_photographers">Nos photographes</h1>
         <div id="photographers"
-            photographersTags="portrait, art, fashion, architecture, travel, sport, animals, events"></div>
+            data-photographersTags="portrait, art, fashion, architecture, travel, sport, animals, events"></div>
     </main>
 
 </body>

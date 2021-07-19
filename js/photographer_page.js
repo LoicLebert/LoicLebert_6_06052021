@@ -6,71 +6,54 @@ let totalLikes = 0
 // this function displays the photographers on pages
 function displayPhotographerInfos(photographerData) {
     // photographer form
-    const photographerForm = document.createElement("span")
-    photographerForm.classList.add("photographerForm")
-    photographerForm.innerHTML = `Contactez-moi
-    ${photographerData.name}`
-    document.querySelector(".formBg").appendChild(photographerForm)
-
-    // photographer profile creation
-    const photographerProfile = document.createElement('div')
-    photographerProfile.classList.add("photographerProfile")
+    formTitle = document.querySelector("#form-title")
+    formTitle.innerHTML = `Contactez-moi ${photographerData.name}`
+    document.querySelector("#title-close").appendChild(formTitle)
 
     // photographer text infos container
     const photographerInfos = document.createElement("div")
-    photographerInfos.classList.add("photographerInfos")
+    photographerInfos.id = "photographerInfos"
 
     // add photographer link
     const photographerLink = document.createElement("h2")
-    photographerLink.classList.add("photographerName")
+    photographerLink.id = "photographerName"
     photographerLink.innerHTML = `${photographerData.name}`
-    photographerInfos.appendChild(photographerLink)
+    document.querySelector("#photographerInfos").appendChild(photographerLink)
 
     const photographerLocation = document.createElement("div")
-    photographerLocation.classList.add("photographerLocation")
+    photographerLocation.id = "photographerLocation"
     photographerLocation.innerHTML = `${photographerData.city}, ${photographerData.country}`
-    photographerInfos.appendChild(photographerLocation)
+    document.querySelector("#photographerInfos").appendChild(photographerLocation)
 
     // add photographer tagline
     const photographerTagline = document.createElement("P")
-    photographerTagline.classList.add("tagline")
+    photographerTagline.id = "tagline"
     photographerTagline.innerText = photographerData.tagline
-    photographerInfos.appendChild(photographerTagline)
+    document.querySelector("#photographerInfos").appendChild(photographerTagline)
 
-    // add photographer tags
-    const photographerTagsContainer = document.createElement("div")
-    photographerTagsContainer.classList.add("tagsContainer")
     photographerData.tags.forEach(tag => {
         const photographerTags = document.createElement("span")
-        photographerTags.setAttribute("class", `${tag} tag`)
-        photographerTags.setAttribute("onclick", `sortByTags('${tag}')`)
+        photographerTags.setAttribute("id", `${tag} tag`)
+        photographerTags.setAttribute("tabindex", "2")
+        photographerTags.addEventListener("click", () => sortByTagsPhotographerPage(tag))
+        photographerTags.addEventListener("keydown", function (e) {
+            if (event.key === "Enter") {
+                sortByTagsPhotographerPage(tag)
+            }
+        })
         photographerTags.innerHTML = `#${tag}`
-        photographerTagsContainer.appendChild(photographerTags)
+        document.querySelector("#tagsContainer").appendChild(photographerTags)
     })
-    photographerInfos.appendChild(photographerTagsContainer)
 
     // add photographer portrait
     const photographerPortrait = document.createElement("img")
     photographerPortrait.src = `/images/Photographers ID Photos/${photographerData.portrait}`
-    photographerProfile.appendChild(photographerPortrait)
+    document.querySelector("#photographerProfile").appendChild(photographerPortrait)
+    photographerPortrait.setAttribute("alt", "")
 
-    photographerProfile.appendChild(formBtn)
-
-    photographerProfile.appendChild(photographerInfos)
-
-    // add photographer total likes
-    const photographerSummary = document.querySelector(".photographerSummary")
-    const photographerTotalLikes = document.createElement("div")
-    photographerTotalLikes.innerHTML = totalLikes + `<i class="fas fa-heart"></i>`
-    photographerTotalLikes.classList.add = ("likeCount")
-    photographerSummary.appendChild(photographerTotalLikes)
-    const priceSummary = document.createElement("div")
-    priceSummary.innerHTML = `${photographerData.price}€ / jour`
-    priceSummary.classList.add("priceSummary")
-    photographerSummary.appendChild(priceSummary)
-
-    // injects photographer profile to the photographer div
-    main.appendChild(photographerProfile)
+    document.querySelector("#photographerProfile").appendChild(formBtn)
+    document.querySelector("#totalLikesCount").innerHTML = totalLikes
+    document.querySelector("#priceSummary").innerHTML = `${photographerData.price}€ / jour`
 
 }
 
@@ -79,23 +62,148 @@ function displayPhotographerInfos(photographerData) {
 // =============================================================== //
 
 // this function displays medias on photographer page
-async function displayPhotographerMedia(photographerMedias, index) {
+async function displayPhotographerMedia(photographerMedias, index, countLike = 0) {
 
     let photographer = await getPhotographerData(photographerMedias[index].photographerId)
 
     // add photographer medias
-    const photographerMediaContainer = document.createElement("div")
+    const photographerMediaContainer = document.createElement("a")
     photographerMediaContainer.classList.add("mediaContainer")
     photographerMediaContainer.setAttribute("id", `container${photographerMedias[index].id}`)
-    const photographerMedia = document.createElement("img")
-    const lightboxFlexDisplay = document.querySelector(".lightboxFlexDisplay")
-    photographerMedia.src = `/images/${photographer.name}/${photographerMedias[index].image}`
-    photographerMedia.classList.add("photographerMedia")
-    // photographerMedia.setAttribute("id", `${photographerMedias[index].id}`)
-    // shows lightbox
-    photographerMedia.addEventListener("click", function (e) {
+    photographerMediaContainer.setAttribute("href", `#`)
+
+    // creates media's content
+    if (photographerMedias[index].video) {
+        const photographerVideo = document.createElement("video")
+        photographerVideo.setAttribute("aria-label", `${photographerMedias[index].title}`)
+        photographerVideo.setAttribute("alt", `${photographerMedias[index].description}`)
+        photographerVideo.setAttribute("tabindex", "0")
+
+        const lightboxFlexDisplay = document.querySelector("#lightboxFlexDisplay")
+
+        photographerVideo.src = `/images/${photographer.name}/${photographerMedias[index].video}`
+        photographerVideo.id = "video"
+
+        photographerVideo.addEventListener("click", lightboxVideoCreation)
+        photographerVideo.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                lightboxVideoCreation()
+            }
+        })
+
+        const videoDescription = document.createElement("figcaption")
+        videoDescription.id = "videoDescription"
+        photographerMediaContainer.appendChild(videoDescription)
+
+        const videoTitle = document.createElement("span")
+        videoTitle.setAttribute("aria-label", "video title")
+        videoTitle.id = "videoTitle"
+        videoTitle.innerHTML = `${photographerMedias[index].title}`
+        videoDescription.appendChild(videoTitle)
+
+        const videoLikes = document.createElement("div")
+        videoLikes.setAttribute("aria-label", "number of likes of the video")
+        videoLikes.addEventListener("click", () => likeCount(photographerMedias, index))
+        videoLikes.id = "videoLike"
+        const likeIcon = document.createElement("span")
+        likeIcon.setAttribute("aria-label", "like heart icon")
+        likeIcon.classList.add("heart-icon")
+        videoLikes.appendChild(likeIcon)
+        const likePara = document.createElement("p")
+        likePara.setAttribute("aria-label", "likes")
+        likePara.id = "likePara"
+        likePara.innerHTML = `${photographerMedias[index].likes}`
+        if (countLike == 1) {
+            document.querySelector("#totalLikesCount").innerText = parseInt(document.querySelector("#totalLikesCount").innerText) + photographerMedias[index].likes
+        }
+        videoLikes.appendChild(likePara)
+        videoDescription.appendChild(videoLikes)
+
+        // injects photographer profile to the photographer div
+        photographerMediaContainer.appendChild(photographerVideo)
+        lightboxFlexDisplay.appendChild(photographerMediaContainer)
+    }
+    else if (photographerMedias[index].image) {
+        const photographerImage = document.createElement("img")
+        photographerImage.setAttribute("aria-label", `${photographerMedias[index].title}`)
+        photographerImage.setAttribute("alt", `${photographerMedias[index].description}`)
+        photographerImage.setAttribute("tabindex", "0")
+
+        const lightboxFlexDisplay = document.querySelector("#lightboxFlexDisplay")
+
+        photographerImage.src = `/images/${photographer.name}/${photographerMedias[index].image}`
+        photographerImage.id = "image"
+
+        photographerImage.addEventListener("click", lightboxImageCreation)
+        photographerImage.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                lightboxImageCreation()
+            }
+        })
+
+        const photoDescription = document.createElement("figcaption")
+        photoDescription.id = "photoDescription"
+        photographerMediaContainer.appendChild(photoDescription)
+
+        const photoTitle = document.createElement("span")
+        photoTitle.setAttribute("aria-label", "video title")
+        photoTitle.id = "photoTitle"
+        photoTitle.innerHTML = `${photographerMedias[index].title}`
+        photoDescription.appendChild(photoTitle)
+
+        const photoLikes = document.createElement("div")
+        photoLikes.setAttribute("aria-label", "number of likes of the image")
+        photoLikes.addEventListener("click", () => likeCount(photographerMedias, index))
+        photoLikes.id = "photoLike"
+        const likeIcon = document.createElement("span")
+        likeIcon.setAttribute("aria-label", "like heart icon")
+        likeIcon.classList.add("heart-icon")
+        photoLikes.appendChild(likeIcon)
+        const likePara = document.createElement("p")
+        likePara.setAttribute("aria-label", "likes")
+        likePara.id = "likePara"
+        likePara.innerHTML = `${photographerMedias[index].likes}`
+        if (countLike == 1) {
+            document.querySelector("#totalLikesCount").innerText = parseInt(document.querySelector("#totalLikesCount").innerText) + photographerMedias[index].likes
+        }
+        photoLikes.appendChild(likePara)
+        photoDescription.appendChild(photoLikes)
+
+        // injects photographer profile to the photographer div
+        photographerMediaContainer.appendChild(photographerImage)
+        lightboxFlexDisplay.appendChild(photographerMediaContainer)
+    }
+
+    function lightboxVideoCreation() {
         currentImagePosition = index
-        e.preventDefault
+        document.querySelector("#lightboxImage").style.display = "none"
+        document.querySelector("#lightboxVideo").style.display = "flex"
+        document.querySelector("#photographerSummary").style.display = "none"
+        document.querySelector("body").classList.add("lightbox")
+        let lightboxBg = document.querySelector("#lightbox-bg")
+        lightboxBg.classList.add("active")
+        let lightbox = document.getElementById("lightbox")
+        lightbox.classList.add("active")
+        let lightboxNext = document.querySelector("#lightbox_next")
+        lightboxNext.classList.add("active")
+        let lightboxPrev = document.querySelector("#lightbox_prev")
+        lightboxPrev.classList.add("active")
+        let lightboxClose = document.querySelector("#lightbox_close")
+        lightboxClose.classList.add("active")
+        let lightboxVideo = document.querySelector("#lightboxVideo")
+        lightboxVideo.src = `/images/${photographer.name}/${photographerMedias[index].video}`
+        lightboxVideo.setAttribute("photographerName", photographer.name)
+        lightboxImage.setAttribute("photographerName", photographer.name)
+    }
+
+    function lightboxImageCreation() {
+        currentImagePosition = index
+        document.querySelector("#lightboxImage").style.display = "flex"
+        document.querySelector("#lightboxVideo").style.display = "none"
+        document.querySelector("#photographerSummary").style.display = "none"
+        document.querySelector("body").classList.add("lightbox")
+        let lightboxBg = document.querySelector("#lightbox-bg")
+        lightboxBg.classList.add("active")
         let lightbox = document.getElementById("lightbox")
         lightbox.classList.add("active")
         let lightboxNext = document.querySelector("#lightbox_next")
@@ -107,71 +215,45 @@ async function displayPhotographerMedia(photographerMedias, index) {
         let lightboxImage = document.querySelector("#lightboxImage")
         lightboxImage.src = `/images/${photographer.name}/${photographerMedias[index].image}`
         lightboxImage.setAttribute("photographerName", photographer.name)
-    })
-
-    const photoDescription = document.createElement("div")
-    photoDescription.classList.add("photoDescription")
-    photographerMediaContainer.appendChild(photoDescription)
-
-    const photoTitle = document.createElement("span")
-    photoTitle.classList.add("photoTitle")
-    photoTitle.innerHTML = `${photographerMedias[index].title}`
-    photoDescription.appendChild(photoTitle)
-
-    const photoLikes = document.createElement("div")
-    photoLikes.addEventListener("click", () => likeCount(photographerMedias, index))
-    photoLikes.classList.add("photoLike")
-    const likeIcon = document.createElement("span")
-    likeIcon.innerHTML = `<i class="fas fa-heart"></i>`
-    photoLikes.appendChild(likeIcon)
-    const likePara = document.createElement("p")
-    likePara.classList.add("likePara")
-    likePara.innerHTML = `${photographerMedias[index].likes}`
-    totalLikes += photographerMedias[index].likes
-    photoLikes.appendChild(likePara)
-    photoDescription.appendChild(photoLikes)
-
-    // injects photographer profile to the photographer div
-    photographerMediaContainer.appendChild(photographerMedia)
-    lightboxFlexDisplay.appendChild(photographerMediaContainer)
-}
-
-async function displayAllMedias(photographerMedias) {
-    document.querySelector(".lightboxFlexDisplay").innerHTML = ""
-    for (let i = 0; i < photographerMedias.length; i++) {
-        await displayPhotographerMedia(photographerMedias, i)
     }
 }
 
+async function displayAllMedias(photographerMedias, countLike = 0) {
+    document.querySelector("#lightboxFlexDisplay").innerHTML = ""
+    for (let i = 0; i < photographerMedias.length; i++) {
+        await displayPhotographerMedia(photographerMedias, i, countLike)
+    }
+}
+
+let photographerData = []
+
 // this function displays the photographer medias according to the id in the url
 async function init() {
+    totalLikes = 0
+    photographerList = getPhotographersData()
     var searchParams = new URLSearchParams(window.location.search)
-    var id = searchParams.get("id")
-    listMedias = await getPhotographerMedia(id)
-    let photographerData = await getPhotographerData(id)
-    displayAllMedias(listMedias)
-    // verifier valeur totalLikes
-    // verifier le selecteur de photographerTotalLikes
-    // verifier les 3 fonctions displayPhotographerMedia, displayPhotographerInfos, LikeCount
+    var photographerId = searchParams.get("id")
+    listMedias = await getPhotographerMedia(photographerId)
+    let photographerData = await getPhotographerData(photographerId)
+    displayAllMedias(listMedias, 1)
     displayPhotographerInfos(photographerData)
 }
 
 init()
 
 // LIKE COUNT
-
 function likeCount(photographerMedias, index) {
+    event.preventDefault()
     photographerMedias[index].isLiked = !photographerMedias[index].isLiked
     photographerMedias[index].likes += photographerMedias[index].isLiked ? 1 : -1;
-    totalLikes += photographerMedias[index].isLiked ? 1 : -1;
-    document.querySelector(`#container${photographerMedias[index].id} .likePara`).textContent = `${photographerMedias[index].likes}`
-    photographerTotalLikes.innerHTML = totalLikes
+    document.querySelector("#totalLikesCount").innerText = parseInt(document.querySelector("#totalLikesCount").innerText) + (photographerMedias[index].isLiked ? 1 : -1);
+    document.querySelector(`#container${photographerMedias[index].id} #likePara`).textContent = `${photographerMedias[index].likes}`
 }
 
 // LIGHTBOX
 
-const photographerPageMain = document.querySelector(".photographerPageMain")
-const lightbox = document.createElement("div")
+const photographerPageMain = document.querySelector("#photographerPageMain")
+const lightbox = document.createElement("section")
 lightbox.id = "lightbox"
 photographerPageMain.appendChild(lightbox)
 
@@ -185,7 +267,7 @@ closeButton.addEventListener("click", closeLightbox)
 
 window.addEventListener('keydown', function (event) {
     if (event.key === "Escape") {
-        document.querySelector(".formBg").classList.remove("active")
+        document.querySelector("#formBg").classList.remove("active")
         closeLightbox()
     }
 });
@@ -196,49 +278,61 @@ function closeLightbox() {
     document.querySelector("#lightbox_prev").classList.remove("active")
     document.querySelector("#lightbox_next").classList.remove("active")
     document.querySelector("#lightbox_close").classList.remove("active")
+    document.querySelector("#photographerSummary").style.display = "flex"
+    document.querySelector("#lightbox-bg").classList.remove("active")
+    document.querySelector("body").classList.remove("lightbox")
 }
 
 document.querySelector("#lightbox_prev").addEventListener("click", lightboxPrev)
 document.querySelector("#lightbox_next").addEventListener("click", lightboxNext)
 
 window.addEventListener("keydown", function (e) {
-    if (e.code == "ArrowLeft") {
+    if (e.key == "ArrowLeft") {
         lightboxPrev()
     }
 })
 window.addEventListener("keydown", function (e) {
-    if (e.code == "ArrowRight") {
+    if (e.key == "ArrowRight") {
         lightboxNext()
     }
 })
 
 function lightboxPrev() {
+    console.log(`${lightboxImage.getAttribute("photographerName")}`)
     if (currentImagePosition > 0) {
         currentImagePosition--
-        let lightboxImage = document.querySelector("#lightboxImage")
-        lightboxImage.src = `/images/${lightboxImage.getAttribute("photographerName")}/${listMedias[currentImagePosition].image}`
+        if (listMedias[currentImagePosition].video) {
+            let lightboxVideo = document.querySelector("#lightboxVideo")
+            lightboxVideo.src = `/images/${lightboxImage.getAttribute("photographerName")}/${listMedias[currentImagePosition].video}`
+            lightboxVideo.style.display = "flex"
+            lightboxImage.style.display = "none"
+        }
+        else {
+            let lightboxImage = document.querySelector("#lightboxImage")
+            lightboxImage.src = `/images/${lightboxImage.getAttribute("photographerName")}/${listMedias[currentImagePosition].image}`
+            lightboxVideo.style.display = "none"
+            lightboxImage.style.display = "flex"
+        }
     }
 }
 
 function lightboxNext() {
     if (currentImagePosition < listMedias.length - 1) {
         currentImagePosition++
-        let lightboxImage = document.querySelector("#lightboxImage")
-        lightboxImage.src = `/images/${lightboxImage.getAttribute("photographerName")}/${listMedias[currentImagePosition].image}`
+        if (listMedias[currentImagePosition].video) {
+            let lightboxVideo = document.querySelector("#lightboxVideo")
+            lightboxVideo.src = `/images/${lightboxImage.getAttribute("photographerName")}/${listMedias[currentImagePosition].video}`
+            lightboxVideo.style.display = "flex"
+            lightboxImage.style.display = "none"
+        }
+        else {
+            let lightboxImage = document.querySelector("#lightboxImage")
+            lightboxImage.src = `/images/${lightboxImage.getAttribute("photographerName")}/${listMedias[currentImagePosition].image}`
+            lightboxVideo.style.display = "none"
+            lightboxImage.style.display = "flex"
+        }
     }
 }
-
-// totalLikesCount() {
-//     let totalLikes = 0
-//     let likes = document.querySelectorAll(".likePara")
-//     likes = Array.from(likes)
-//     likes.forEach(like => {
-//         like.addEventListener("click", e =>{
-//             e.preventDefault()
-//             like[0].innerHTML = (parseInt(like[0].innerHTML) +1).toString();
-//         })
-//     })
-// }
 
 let sortPicsBtn = document.getElementById("sortPicsBtn")
 sortPicsBtn.addEventListener("change", sortPics)

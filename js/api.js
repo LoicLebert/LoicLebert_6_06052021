@@ -1,11 +1,15 @@
 // DATA
 
-// this function gets the photographers' datas
+// // this function gets the photographers' datas
 async function getPhotographersData() {
     let data = await fetch("../js/FishEyeData.json")
         .then(res => res.json())
         .then(jsonData => {
-            return jsonData.photographers
+            const photographerList = []
+            jsonData.photographers.forEach(data => {
+                photographerList.push(new Photographer(data.id, data.name, data.city, data.country, data.tags, data.tagline, data.price, data.portrait))
+            });
+            return photographerList
         });
     return data
 }
