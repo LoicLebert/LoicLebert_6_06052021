@@ -1,0 +1,859 @@
+*, *:before, *:after {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+
+body {
+    line-height: 1;
+    font-family: 'DM Sans', sans-serif;
+    margin-top: 2em;
+    margin-left: 6em;
+    margin-right: 6em;
+}
+
+body.lightbox {
+    overflow: hidden;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+#filtersNav {
+    height: 49px;
+    position: absolute;
+    justify-items: center;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+nav span {
+    border: 0.5px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 15px;
+    color: #911C1C;
+    font-size: 12px;
+    text-align: center;
+    line-height: 16px;
+    cursor: pointer;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+#logo {
+    width: 200px;
+    height: 50px;
+}
+
+#tagsContainer span {
+    border: 0.5px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 15px;
+    color: #911C1C;
+    font-size: 12px;
+    text-align: center;
+    line-height: 16px;
+    cursor: pointer;
+    /* padding: 0.5em; */
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+#tagsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.5em;
+    order: 4;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    line-height: 16px;
+    font-size: 12px;
+    text-align: center;
+}
+
+#our_photographers {
+    color: #901C1C;
+    font-size: 36px;
+    line-height: 47px;
+    text-align: center;
+    position: absolute;
+    top: 2%;
+    right: 2%;
+
+}
+
+main {
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+#photographers {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-width: 100%;
+    row-gap: 6em;
+    column-gap: 20em;
+    margin-top: 2em;
+}
+
+#photographerContainer {
+    display: flex;
+    flex: 1 0 20%;
+    flex-direction: column;
+    text-align: center;
+    width: 300px;
+    justify-content: space-between;
+    height: 380px;
+}
+
+#photographerContainer img {
+    text-align: center;
+    object-fit: cover;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+
+#photographerContainer a {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 23px;
+    width: 100%;
+    max-height: 300px;
+    white-space:nowrap;
+}
+
+#photographerContainer h2 {
+    margin-top: 1em;
+}
+
+#photographerName {
+    color: #D3573C;
+    font-weight: 100;
+}
+
+#photographerDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+}
+
+#photoLike {
+    display: flex;
+    flex-direction: row;
+    order: 2;
+    gap: 0.5em;
+    line-height: 1;
+}
+
+#photoLike span {
+    order: 2;
+}
+
+#videoLike {
+    display: flex;
+    flex-direction: row;
+    order: 2;
+    gap: 0.5em;
+    line-height: 1;
+}
+
+#videoLike span {
+    order: 2;
+}
+
+.fas {
+    line-height: 0.8;
+}
+
+#photographerContainer p {
+    margin: 0;
+}
+
+#photographerProfile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    order: 1;
+    width: 100%;
+    height: 313px;
+    background-color: #FAFAFA;
+    padding: 2em;
+    margin-top: 2em;
+}
+
+#photographerProfile a {
+    color: #D3573C;
+    text-align: center;
+    font-size: 64px;
+    line-height: 47px;
+}
+
+#photographerProfile img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    order: 3;
+}
+
+#photographerInfos {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    justify-content: space-between;
+    order: 1;
+}
+
+#photographerInfos h2 {
+    font-size: 70px;
+}
+
+#photographerInfos #tagline {
+    font-size: 16px;
+    color: #525252;
+    font-weight: 200;
+}
+
+#photographerLocation {
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    color: #901C1C;
+}
+
+#sortBtnContainer {
+    display: flex;
+}
+
+#sortPics {
+    display: flex;
+    flex-direction: row;
+    order: 2;
+    align-items: center;
+    align-self:flex-start;
+    margin-top: 0.5em;
+    margin-bottom: 4em;
+}
+
+#sortPics span {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+#sortPicsBtn {
+    color: white;
+    font-size: 20px;
+    font-family: inherit;
+    font-weight: 400;
+    border: none;
+    background-color: #901C1C;
+    cursor: pointer;
+    width: 170px;
+    height: 69px;
+    border-radius: 5px;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+label[for=sortPicsBtn] {
+    text-indent: -9999px;
+}
+
+#sortArrow {
+    pointer-events: none;
+    position: relative;
+    right: -155px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: url(../images/arrow_white.svg)center center / 12px 21px no-repeat;
+    width: 32px;
+    z-index: 2000;
+    text-indent: -9999px;
+    transform: rotate(90deg);
+}
+
+#photographerMedias {
+    display: flex;
+    order: 3;
+}
+
+#photoTitle, #videoTitle {
+    font-size: 24px;
+    color: #901C1C;
+    order: 1;
+    line-height: 1;
+}
+
+#photoDescription, #videoDescription {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    order: 2;
+}
+
+#likePara {
+    align-self: center;
+    order: 1;
+}
+
+#tagline {
+    font-size: 10px;
+    color: black;
+}
+
+#price {
+    color: #757575;
+    font-size: 12px;
+}
+
+#formBtn {
+  position: absolute;
+  left: 650px;
+  display: block;
+  order: 2;
+  color: white;
+  font-size: 20px;
+  font-family: inherit;
+  font-weight: 400;
+  border: none;
+  background-color: #901C1C;
+  width: 170px;
+  height: 69px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#formBg {
+  display: none;
+}
+
+#formBg.active {
+    width: 669px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 5em;
+    background-color: #DB8876;
+    border-radius: 5px;
+    z-index: 2;
+    padding: 2em;
+    gap: 1em;
+}
+
+#title-close {
+    display: flex;
+    flex-direction: row;
+}
+
+#close {
+  background: url(../images/cross_white.svg) center center / 100% 100% no-repeat transparent;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  z-index: 2;
+  opacity: 1;
+  cursor: pointer;
+  border: none;
+}
+#close:before,
+#close:after {
+  position: absolute;
+  left: 15px;
+  content: " ";
+  height: 33px;
+  width: 3px;
+}
+
+#close i {
+    color: white;
+    font-size: 100px;
+}
+
+form {
+  width: 100%;
+  order: 2;
+  line-height: 0.8;
+}
+
+form label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 30px;
+}
+
+form input {
+  width: 599px;
+  height: 68px;
+  border-radius: 5px;
+  border: none;
+  font-size: 40px;
+  font-family: 'DM Sans', sans-serif;;
+}
+
+textarea {
+   height: 170px;
+   width: 100%;
+   border: none; 
+   resize: none;
+}
+
+#btn-close {
+    color: white;
+    font-size: 20px;
+    font-family: inherit;
+    font-weight: 400;
+    border: none;
+    background-color: #901C1C;
+    cursor: pointer;
+    width: 170px;
+    height: 69px;
+    border-radius: 5px;
+    padding: 1em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#form-title {
+    padding-right: 1.5em;
+    font-size: 64px;
+    font-weight: lighter;
+    line-height: 1;
+}
+
+#photographerPageMain {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#photographerMedias::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#photographerMedias img, video {
+    width: 350px;
+    min-height: 300px;
+    object-fit: cover;
+}
+
+#photographerMedias a {
+    font-size: 24px;
+    color: #901C1C;
+}
+
+.heart-icon, #likePara {
+    position: relative;
+    font-size: 20px;;
+    color: #901C1C;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.heart-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: url(../images/heart.svg) center center / 16px 28px no-repeat;
+    width: 32px;
+    height: 32px;
+}
+
+.heart-icon-black {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: url(../images/heart_black.svg) center center / 28px 52px no-repeat;
+    width: 32px;
+    height: 32px;
+}
+
+#like-button {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 20px;
+    height: 20px;
+}
+
+/* LIGHTBOX */
+
+#lightbox_next,
+#lightbox_prev {
+    display: none;
+}
+
+#lightbox_next.active,
+#lightbox_prev.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: url(../images/arrow.svg) center center / 16px 28px no-repeat;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    margin-top: -14px;
+    z-index: 2000;
+}
+
+#lightbox_next.active {
+    position: absolute;
+    right: 10px;
+}
+
+#lightbox_prev {
+    right: auto;
+    left: 0;
+    transform: rotate(180deg);
+}
+
+#lightbox_close {
+    display: none;
+}
+
+#lightbox_close.active {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: url(../images/cross.svg) center center / 100% 100% no-repeat transparent;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    z-index: 2000;
+}
+
+#lightboxFlexDisplay {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    align-content: center;
+    order: 2;
+    row-gap: 5em;
+    column-gap: 15em;
+    padding-bottom: 100px;
+}
+
+#lightboxFlexDisplay img, video {
+    width: 350px;
+    height: 300px;
+    cursor: pointer;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+#lightbox {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    width: 1200px;
+    height: 1000px;
+    background-color: white;
+    display: none;
+}
+
+#lightbox-bg {
+    display: none;
+}
+
+#lightbox-bg.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 9998;
+    overflow: hidden;
+}
+
+#lightbox button  {
+    cursor: pointer;
+    text-indent: -9999px;
+}
+
+#lightbox img, #lightbox video {
+    width: 1050px;
+    height: 900px;
+    position: relative;
+    object-fit: cover;
+    box-shadow: 6px 5px 2px rgb(216, 216, 216);
+}
+
+#lightbox.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mediaContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 350px;
+    height: 340px;
+}
+
+#photographerTotalLikes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#totalLikesCount {
+    font-size: 30px;
+}
+
+#total-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+}
+
+#photographerSummary {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em;
+    width: 376px;
+    height: 89px;
+    border-radius: 5px;
+    bottom: -0.8em;
+    right: 4em;
+    background-color: #DB8876;
+    z-index: 9999;
+}
+
+#photographerSummary i {
+    color: black;
+    font-size: 30px;
+}
+#priceSummary {
+    font-family: "DM Sans", sans-serif;
+    font-size: 30px;
+}
+
+#formBtnMobile {
+    display: none;
+}
+
+@media only screen and (max-width: 769px) {
+    body {
+        margin-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+        padding: 2em;
+    }
+
+    #indexPageMain {
+        display: flex;
+    }
+
+    #photographers {
+        padding-bottom: 100px;
+    }
+
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    #filtersNav {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        height: auto;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        gap: 0.2em;
+        margin-top: 2em;
+    }
+
+    #logo img {
+        width: 160px;
+        height: auto;
+    }
+
+    #filtersNav {
+        order: 3;
+    }
+
+    #our_photographers {
+        font-size: 14px;
+        right: 2em;
+        top: 2em;
+    }
+
+    #photographerInfos {
+        height: 120px;
+    }
+
+    #photographerInfos h2 {
+        font-size: 36px;
+    }
+
+    #photographerProfile {
+        width: 100%;
+        height: 200px;
+        padding: 0;
+        background-color: white;
+        position: relative;
+    }
+
+    #photographerProfile img {
+        position: absolute;
+        width: 110px;
+        height: 110px;
+        object-fit: cover;
+        border-radius: 50%;
+        right: 0;
+        top: 20px;
+    }
+
+    #photographerLocation {
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    #photographerInfos #tagline {
+        font-size: 13px;
+    }
+
+    #sortPics {
+        display: none;
+    }
+
+    .mediaContainer {
+        height: auto;
+        gap: 0.5em;
+    }
+
+    #lightboxFlexDisplay img {
+        height: 190px;
+    }
+
+    #lightboxFlexDisplay {
+        row-gap: 1em;
+    }
+
+    #formBtn {
+        display: none;
+    }
+
+    #formBtnMobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 2em;
+        z-index: 99999;
+        color: white;
+        font-size: 20px;
+        font-family: inherit;
+        font-weight: 400;
+        border: none;
+        background-color: #901C1C;
+        width: 170px;
+        height: 35px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #photographerSummary {
+        display: none!important;
+    }
+
+    #formBg.active {
+        display: flex!important;
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+    }
+
+    #form input {
+        width: 100%;
+        height: 52px;
+    }
+
+    #form-title {
+        font-size: 36px;
+    }
+
+    #close {
+        width: 25px;
+        height: 25px;
+    }
+
+    #form span {
+        font-size: 24px;
+    }
+
+    body.lightbox {
+        overflow: hidden;
+    }
+
+    #btn-close {
+        height: 35px;
+        margin-top: 1em;
+        text-align: center;
+        vertical-align: middle;
+        padding: 0;
+    }
+}

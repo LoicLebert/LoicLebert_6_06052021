@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>FishEye</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/8264f3a608.js" crossorigin="anonymous"></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/index.js" defer></script>
+    <script src="../js/filters.js" defer></script>
+    <script src="../js/Photographer.js" defer></script>
+</head>
+
+
+<body>
+    <header>
+        <a id="logo" href="/html/index.html" tabindex="1"><img src="../images/logo.png" alt="Fisheye Home page" /></a>
+        <nav aria-label="photographer categories" id="filtersNav">
+            <span id="portrait" class="tag" onclick="sortByTags('portrait')" onkeydown="sortByTagsKey('portrait')"
+                tabindex="2">#Portrait</span>
+            <span id="art" class="tag" onclick="sortByTags('art')" onkeydown="sortByTagsKey('art')"
+                tabindex="2">#Art</span>
+            <span id="fashion" class="tag" onclick="sortByTags('fashion')" onkeydown="sortByTagsKey('fashion')"
+                tabindex="2">#Fashion</span>
+            <span id="architecture" class="tag" onclick="sortByTags('architecture')"
+                onkeydown="sortByTagsKey('architecture')" tabindex="2">#Architecture</span>
+            <span id="travel" class="tag" onclick="sortByTags('travel')" onkeydown="sortByTagsKey('travel')"
+                tabindex="2">#Travel</span>
+            <span id="sport" class="tag" onclick="sortByTags('sport')" onkeydown="sortByTagsKey('sport')"
+                tabindex="2">#Sport</span>
+            <span id="animals" class="tag" onclick="sortByTags('animals')" onkeydown="sortByTagsKey('animals')"
+                tabindex="2">#Animals</span>
+            <span id="events" class="tag" onclick="sortByTags('events')" onkeydown="sortByTagsKey('events')"
+                tabindex="2">#Events</span>
+        </nav>
+    </header>
+
+    <main id="indexPageMain">
+        <h1 id="our_photographers">Nos photographes</h1>
+        <div id="photographers"
+            data-photographersTags="portrait, art, fashion, architecture, travel, sport, animals, events"></div>
+    </main>
+
+</body>
+
+</html>

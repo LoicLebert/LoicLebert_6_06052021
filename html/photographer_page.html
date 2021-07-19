@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>FishEye</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="https://kit.fontawesome.com/8264f3a608.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
+    <script src="../js/api.js" defer></script>
+    <script src="../js/photographer_page.js" defer></script>
+    <script src="../js/form.js" defer></script>
+    <script src="../js/filters.js" defer></script>
+    <script src="../js/Photographer.js" defer></script>
+</head>
+
+
+<body>
+    <header>
+        <a id="logo" href="/html/index.html" tabindex="1"><img src="../images/logo.png" alt="Fisheye Home page" /></a>
+    </header>
+
+    <main id="photographerPageMain">
+        <div id="photographerProfile">
+            <aside id="photographerInfos" aria-label="photographer infos">
+                <aside id="tagsContainer" aria-label="photographer tags"></aside>
+            </aside>
+        </div>
+
+        <div id="sortPics">
+            <span>Trier par</span>
+            <div id="sortBtnContainer">
+                <span id="sortArrow">arrow</span>
+                <label for="sortPicsBtn">Order by:</label>
+                <select id="sortPicsBtn" tabindex="4" aria-label="Order by">
+                    <OPTION class="sortBtn" id="sortByPopularity" label="popularity" value="popularity"></OPTION>
+                    <OPTION class="sortBtn" id="sortByDate" label="date" value="date"></OPTION>
+                    <OPTION class="sortBtn" id="sortByTitle" label="title" value="title"></OPTION>
+                </select>
+            </div>
+        </div>
+        <button id="formBtn" aria-label="Contact Me" tabindex="3">Contactez-moi</button>
+        <button id="formBtnMobile" aria-label="Contact Me">Contactez-moi</button>
+        <section id="formBg">
+            <div id="title-close">
+                <h1 id="form-title">Sample</h1>
+                <button id="close" aria-label="Close contact form"></button>
+            </div>
+            <form id="form" method="GET">
+                <label for="firstName">Prénom</label>
+                <br><br>
+                <input type="text" id="firstName" />
+                <br><br>
+                <label for="lastName">Nom</label>
+                <br><br>
+                <input type="text" id="lastName" />
+                <br><br>
+                <label for="email">Email</label>
+                <br><br>
+                <input type="email" id="email" />
+                <br><br>
+                <label for="message">Votre message</label>
+                <br><br>
+                <textarea id="message" rows="4"></textarea>
+                <br><br>
+                <button type="submit" id="btn-close" aria-label="Send">Envoyer</button>
+            </form>
+            <p style="color: red;" id="erreur"></p>
+        </section>
+
+        <aside id="photographerSummary" tabindex="15">
+            <div id="photographerTotalLikes">
+                <div id="total-icon">
+                    <span id="totalLikesCount"></span>
+                    <span class="heart-icon-black"></span>
+                </div>
+                <div id="priceSummary"></div>
+            </div>
+        </aside>
+
+        <!-- <div id="lightbox"><img id="lightboxImage" aria-label="image closeup view"></div> -->
+
+        <div id="lightboxFlexDisplay"></div>
+
+        <div id="lightbox-bg">
+            <div id="lightbox">
+                <button class="lightbox-button" id="lightbox_close">Fermer</button>
+                <button class="lightbox-button" id="lightbox_next" data-mediaId="">Suivant</button>
+                <button class="lightbox-button" id="lightbox_prev" data-mediaId="">Précédent</button>
+                <img id="lightboxImage" alt="image closeup view" src="../images/Sample/Animals_Majesty.jpg">
+                <video src="/images/Sample/Sport_Tricks_in_the_air.mp4" autoplay id="lightboxVideo"
+                    aria-label="video closeup view"></video>
+            </div>
+        </div>
+    </main>
+</body>
