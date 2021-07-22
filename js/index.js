@@ -6,12 +6,12 @@ function displayPhotographers(photographerData) {
     photographerContainer.id = "photographerContainer"
 
     const photographerLink = document.createElement("a")
-    photographerLink.href = `/html/photographer_page.html?id=${photographerData.id}`
+    photographerLink.href = `photographer_page.html?id=${photographerData.id}`
     photographerContainer.appendChild(photographerLink)
 
     // add photographer portrait
     const photographerPortrait = document.createElement("img")
-    photographerPortrait.src = `/images/Photographers ID Photos/${photographerData.portrait}`
+    photographerPortrait.src = `images/Photographers ID Photos/${photographerData.portrait}`
     photographerPortrait.setAttribute("alt", "")
     photographerLink.appendChild(photographerPortrait)
 
