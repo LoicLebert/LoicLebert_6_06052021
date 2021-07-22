@@ -2,7 +2,7 @@
 
 // // this function gets the photographers' datas
 async function getPhotographersData() {
-    let data = await fetch("../js/FishEyeData.json")
+    let data = await fetch("js/FishEyeData.json")
         .then(res => res.json())
         .then(jsonData => {
             const photographerList = []
@@ -16,7 +16,7 @@ async function getPhotographersData() {
 
 // this function gets the id of the photographer
 async function getPhotographerData(id) {
-    let data = await fetch("../js/FishEyeData.json")
+    let data = await fetch("js/FishEyeData.json")
         .then(res => res.json())
         .then(jsonData => {
             return jsonData.photographers.filter(p => p.id == id)[0]
@@ -29,7 +29,7 @@ async function getPhotographerData(id) {
 
 // this function gets the id of the photographer media
 async function getPhotographerMedia(photographerId) {
-    let photographerMedia = await fetch("../js/FishEyeData.json")
+    let photographerMedia = await fetch("js/FishEyeData.json")
         .then(res => res.json())
         .then(jsonData => {
             return jsonData.media.filter(medium => medium.photographerId == photographerId)
