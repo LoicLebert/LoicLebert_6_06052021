@@ -26,6 +26,11 @@ function closeForm() {
 
 form.addEventListener("submit", function (e) {
 
+    e.preventDefault()
+
+    formBg.classList.remove("active")
+    document.querySelector("body").classList.remove("lightbox")
+
     const firstName = document.querySelector("#firstName")
     const lastName = document.querySelector("#lastName")
     const email = document.querySelector("#email")
@@ -33,7 +38,7 @@ form.addEventListener("submit", function (e) {
     var erreur;
 
     if (firstName.value && email.value && lastName.value) {
-        console.log("ok", "c'est bon", "ça marche")
+        console.log(firstName.value, email.value, lastName.value)
     }
 
     else if (!email.value) {
@@ -47,7 +52,6 @@ form.addEventListener("submit", function (e) {
     }
 
     if (erreur) {
-        e.preventDefault();
         document.getElementById("erreur").innerHTML = erreur;
         return false;
     } else {
